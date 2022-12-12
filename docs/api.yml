@@ -31,7 +31,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBook'
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateBook'
       responses:
         '200':
           description: List of created books
@@ -52,7 +54,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateBook'
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBook'
       responses:
         '200':
           description: List of updated books
