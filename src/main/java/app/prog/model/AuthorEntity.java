@@ -1,5 +1,6 @@
 package app.prog.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class AuthorEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(unique = true, nullable = false)
   private String name;
   private String birthdate;
   private String particularity;
