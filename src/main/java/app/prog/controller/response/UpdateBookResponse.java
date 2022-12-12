@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class UpdateBookResponse {
     private int id;
-    private int author;
+    private String author;
     private String title;
 }

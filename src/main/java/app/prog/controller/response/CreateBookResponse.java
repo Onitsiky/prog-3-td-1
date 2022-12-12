@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 @Builder
 public class CreateBookResponse {
-    private int author;
+    private String author;
     private String title;
 }

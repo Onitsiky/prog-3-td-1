@@ -20,20 +20,20 @@ public class BookRestMapper {
 
     private final AuthorRepository repository;
     public BookResponse toRest(BookEntity domain) {
-        Optional<AuthorEntity> optional = repository.findById(String.valueOf(domain.getAuthor().getId()));
+        Optional<AuthorEntity> author = repository.findById(String.valueOf(domain.getAuthor().getId()));
         return BookResponse.builder()
                 .id(domain.getId())
                 .title(domain.getTitle())
-                .author(optional.get().getName())
+                .author(author.get().getName())
                 .hasAuthor(domain.hasAuthor())
                 .build();
     }
 
     public BookEntity toDomain(CreateBookResponse rest) {
-        Optional<AuthorEntity> optional = repository.findById(String.valueOf(rest.getAuthor()));
-        if(optional.isPresent()){
+        AuthorEntity author = repository.getByName(rest.getAuthor());
+        if(author != null){
             return BookEntity.builder()
-                .author(optional.get())
+                .author(author)
                 .title(rest.getTitle())
                 .pageNumber(0) //Constraint not null in database, default value is 0
                 .build();
@@ -44,11 +44,11 @@ public class BookRestMapper {
     }
 
     public BookEntity toDomain(UpdateBookResponse rest) {
-        Optional<AuthorEntity> optional = repository.findById(String.valueOf(rest.getAuthor()));
-        if(optional.isPresent()){
+        AuthorEntity author = repository.getByName(rest.getAuthor());
+        if(author != null){
             return BookEntity.builder()
                 .id(rest.getId())
-                .author(optional.get())
+                .author(author)
                 .title(rest.getTitle())
                 .pageNumber(0) //Constraint not null in database, default value is 0
                 .build();
