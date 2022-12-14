@@ -21,7 +21,7 @@ public class BookEntity {
     private int id;
     private String title;
     @ManyToOne
-    @JoinColumn(name = "author")
+    @JoinColumn(name = "author_id")
     private AuthorEntity author;
     private Integer pageNumber;
     private LocalDate releaseDate;
@@ -29,8 +29,8 @@ public class BookEntity {
     @ManyToMany
     @JoinTable(
         name = "book_category",
-        joinColumns = @JoinColumn(name = "book"),
-        inverseJoinColumns = @JoinColumn(name = "category")
+        joinColumns = @JoinColumn(name = "book_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<CategoryEntity> categoryList;
     public boolean hasAuthor() {

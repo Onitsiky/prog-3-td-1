@@ -22,16 +22,25 @@ import java.util.Optional;
 public class BookRestMapper {
 
     private final AuthorRepository repository;
-    private final CategoryRepository categoryRepository;
     public BookResponse toRest(BookEntity domain) {
-        Optional<AuthorEntity> author = repository.findById(String.valueOf(domain.getAuthor().getId()));
-        return BookResponse.builder()
+        if(domain.hasAuthor() == true){
+            return BookResponse.builder()
                 .id(domain.getId())
                 .title(domain.getTitle())
-                .author(author.get().getName())
+                .author(domain.getAuthor().getName())
                 .categories(domain.getCategoryList())
                 .hasAuthor(domain.hasAuthor())
                 .build();
+        }
+        else {
+            return BookResponse.builder()
+                .id(domain.getId())
+                .title(domain.getTitle())
+                .author(null)
+                .categories(domain.getCategoryList())
+                .hasAuthor(domain.hasAuthor())
+                .build();
+        }
     }
 
     public BookEntity toDomain(CreateBookResponse rest) {
