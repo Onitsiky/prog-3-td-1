@@ -1,3 +1,3 @@
 alter table book drop column author;
 
-alter table book add column author int references author(id);
+alter table book add column author_id int references author(id);

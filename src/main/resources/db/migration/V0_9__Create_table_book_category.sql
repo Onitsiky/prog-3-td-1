@@ -1,5 +1,5 @@
 create table book_category
 (
-    category int not null references category(id),
-    book int not null references book(id)
+    category_id int references category(id),
+    book_id int not null references book(id)
 );

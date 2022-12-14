@@ -1,3 +1,5 @@
+create sequence if not exists serial start with 11;
+
 create table book
 (
     id     serial,
